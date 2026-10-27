@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/*
+ * Light theme only. "Lake and sun": a deep lake teal for trust and calm (Barton
+ * Springs, Lady Bird Lake), soft saffron for Texas sun and warmth, on sage-white
+ * surfaces that echo limestone and live oaks.
+ */
+:root {
+  --paper: #f5f7f4;
+  --paper-deep: #e6edea;
+  --ink: #0b1f1e;
+  --muted: #53635f;
+  --line: #d2dbd7;
+  --brand: #0f4a47; /* buttons, key figures, emphasis text */
+  --accent: #e8a445; /* saffron: rings, stars, arrow chips */
+  --accent-strong: #cf7f17; /* saffron dark enough to read as a thin line */
+  --accent-ink: #0f4a47; /* emphasis text on paper, same as brand */
+  --on-accent: #0b1f1e;
+  --danger: #b42318;
+  --glass-edge: rgb(255 255 255 / 0.6);
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-accent: var(--on-accent);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-ink);
+    outline-offset: 3px;
+  }
+}
+
+/* Lenis smooth scrolling: it owns scroll easing, so native smooth scrolling steps aside. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.font-display {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+@custom-variant reduced-transparency (@media (prefers-reduced-transparency: reduce));
+
+/*
+ * Frosted material for the navbar. This is a web approximation built from a
+ * backdrop blur (set with Tailwind utilities on the element), an edge
+ * highlight and a tinted shadow. It is not Apple's Liquid Glass, which has no
+ * web implementation.
+ */
+.glass-nav {
+  border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),
+    0 16px 36px -18px color-mix(in srgb, var(--ink) 38%, transparent);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-nav-fill {
+    opacity: 1 !important;
+  }
+}
+
+/* Hero entrance. Plain CSS so it runs at first paint, before hydration. */
+@keyframes rise-in {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The single marquee on the page: press logos. Two identical lists, shifted by one list width. */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--marquee-duration, 44s) linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Hero photo settling in on load: a slow push out, so the frame feels like a held breath. */
+@keyframes settle {
+  from {
+    transform: scale(1.07);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.anim-settle {
+  animation: settle 2.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.anim-rise {
+  animation: rise-in 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+.anim-fade-up {
+  animation: fade-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .anim-rise,
+  .anim-fade-up,
+  .anim-settle {
+    animation: none;
+  }
+
+  .marquee-track {
+    animation: none;
+    width: auto;
+  }
+
+  .marquee-track > ul {
+    flex-wrap: wrap;
+    row-gap: 1.5rem;
+  }
+
+  .marquee-dup {
+    display: none;
+  }
+}

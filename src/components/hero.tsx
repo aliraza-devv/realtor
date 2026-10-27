@@ -1,0 +1,72 @@
+import Link from "next/link";
+import { ArrowRight, InstagramLogo } from "@phosphor-icons/react/ssr";
+import { agent, heroPhoto } from "@/data/properties";
+import { HeroStage } from "./hero-stage";
+
+const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
+
+export function Hero() {
+  return (
+    <section id="top" className="p-3">
+      <HeroStage
+        src={heroPhoto}
+        alt="Amelia in a white suit at a modern home, heading left and glancing back at the camera"
+      >
+        <a
+          href={agent.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Follow ${agent.name} on Instagram, ${agent.followers} followers`}
+          className="anim-fade-up inline-flex items-center gap-2.5 text-[15px] text-white/90 transition-colors hover:text-white"
+          style={delay(0)}
+        >
+          <InstagramLogo className="size-5" aria-hidden="true" />
+          <span className="font-semibold">{agent.handle}</span>
+          <span className="text-white/70">{agent.followers} followers</span>
+        </a>
+
+        <h1 className="mt-5 text-[clamp(3.5rem,14.5vw,5.5rem)] sm:text-[clamp(4rem,10vw,9.5rem)] lg:text-[clamp(5rem,8.6vw,9rem)] font-semibold leading-[0.88] tracking-[-0.065em] text-white">
+          <span className="block overflow-hidden pb-[0.06em] pt-[0.02em]">
+            <span className="anim-rise block" style={delay(120)}>
+              Real homes.
+            </span>
+          </span>
+          <span className="block overflow-hidden pb-[0.12em] pr-[0.08em]">
+            <span className="anim-rise block italic" style={delay(240)}>
+              No filter.
+            </span>
+          </span>
+        </h1>
+
+        <p
+          className="anim-fade-up mt-5 max-w-[40ch] text-lg leading-relaxed text-white/85 sm:text-xl"
+          style={delay(420)}
+        >
+          Unscripted Austin tours, straight talk on price, and one agent from first showing to
+          closing.
+        </p>
+
+        <div
+          className="anim-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          style={delay(520)}
+        >
+          <Link
+            href="/#contact"
+            className="group inline-flex h-14 w-full items-center justify-between gap-6 whitespace-nowrap rounded-full bg-white pl-7 pr-2 text-[16px] font-medium text-[#0e1210] transition-transform duration-300 active:scale-[0.98] sm:w-auto"
+          >
+            Book a free call
+            <span className="grid size-10 place-items-center rounded-full bg-accent text-on-accent transition-transform duration-300 group-hover:translate-x-0.5">
+              <ArrowRight className="size-[18px]" weight="bold" aria-hidden="true" />
+            </span>
+          </Link>
+          <Link
+            href="/properties"
+            className="inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-full border border-white/45 px-7 text-[16px] font-medium text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-[0.98] sm:w-auto"
+          >
+            Browse homes
+          </Link>
+        </div>
+      </HeroStage>
+    </section>
+  );
+}

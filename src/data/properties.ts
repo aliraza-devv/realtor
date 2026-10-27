@@ -18,12 +18,16 @@ export const agent = {
   title: "Principal Broker",
   handle: "@ameliahart.homes",
   instagramUrl: "https://www.instagram.com/",
+  // Placeholder: point this at the agent's real booking page (Calendly, Cal.com, etc.).
+  bookingUrl: "https://calendly.com/",
   followers: "214K",
   phone: "(512) 555-0142",
   email: "hello@hartresidential.example",
   office: "1200 S Congress Ave, Suite 210, Austin, TX",
   // Face-focused, mirrored crop of the hero photo, so the avatar, About portrait and hero show one person.
   photo: `${heroBase}?auto=format&fit=crop&crop=focalpoint&fp-x=0.49&fp-y=0.5&fp-z=2.4&w=900&h=1125&flip=h&q=80`,
+  // The full 4:5 frame of the same photo (mirrored like the hero), for the About section.
+  portrait: `${heroBase}?auto=format&fit=crop&w=1200&h=1500&flip=h&q=80`,
   stats: [
     { value: "$142M", label: "Closed in the last 24 months" },
     { value: "230+", label: "Households helped" },
@@ -117,26 +121,26 @@ export const problems = [
   {
     icon: "camera",
     topic: "Photos that mislead",
-    pain: "I took a day off work to tour a house that looked nothing like its photos.",
-    cost: "A wasted Saturday, a long drive across Austin, and a growing suspicion that every listing is dressed up. Wide-angle lenses and heavy edits can make a small room look twice its size.",
+    pain: "It looked nothing like its photos.",
+    cost: "A wasted Saturday.",
   },
   {
     icon: "tag",
     topic: "A price that's too high",
-    pain: "We listed too high, watched it sit for two months, then cut the price anyway.",
-    cost: "Stale listings lose their leverage. Buyers read every price cut as a warning, and you often end up with less than if you had priced it right on day one.",
+    pain: "We listed too high and it sat for two months.",
+    cost: "A price cut anyway.",
   },
   {
     icon: "warning",
     topic: "Surprises after the offer",
-    pain: "The inspection found a foundation problem that nobody mentioned.",
-    cost: "Foundation, roof and drainage issues can run to tens of thousands of dollars, and they tend to surface after you have fallen in love and put money down.",
+    pain: "The inspection found a foundation problem.",
+    cost: "Repair bills you never budgeted.",
   },
   {
     icon: "phone",
     topic: "An agent who vanishes",
-    pain: "My agent disappeared the moment the contract was signed.",
-    cost: "Texts go unanswered for days, an assistant handles your calls, and nobody is there when closing gets stressful and the deadline gets close.",
+    pain: "My agent vanished after I signed.",
+    cost: "Days of silence before closing.",
   },
 ] as const;
 
@@ -431,46 +435,129 @@ export function getProperty(slug: string) {
   return properties.find((p) => p.slug === slug);
 }
 
-// Sample client stories, one per sold home in the case studies. Replace with real,
-// permissioned reviews.
-export const testimonials = [
-  {
-    quote:
-      "Amelia told us what to fix before listing and what to leave alone. We sold in nine days, $45K over asking.",
-    name: "Priya & Daniel R.",
-    detail: "Sold in Zilker",
-    image: photo("1600573472592-401b489a3cdc"),
-  },
-  {
-    quote:
-      "Two buyers and one deadline. Her pre-listing inspection kept every offer clean, and we picked our own closing date.",
-    name: "Marcus & Lena T.",
-    detail: "Sold in Mueller",
-    image: photo("1583608205776-bfd35f0d9f83"),
-  },
-  {
-    quote:
-      "Our neighbors' homes sat for months. Amelia gave us the honest price on day one, and we closed the first weekend.",
-    name: "The Okafor family",
-    detail: "Sold in Travis Heights",
-    image: photo("1600607688969-a5bfcd646154"),
-  },
-] as const;
+export type Faq = { q: string; lead: string; a: string };
 
+// Sample FAQs, each one an objection that stops buyers and sellers from making the first call.
+// Replace the numbers and policies with the agent's real ones.
+export const faqGroups: readonly { label: string; items: readonly Faq[] }[] = [
+  {
+    label: "Selling",
+    items: [
+      {
+        q: "What if my home sits on the market for months?",
+        lead: "I price it to sell in the first two weeks.",
+        a: "Homes that sit were almost always priced on hope, not on the last three sales on your street. I price from those sales and tell you the number even when it is lower than you wanted. If there are no serious offers after 14 days, I show you the showing data and we adjust together.",
+      },
+      {
+        q: "Do I have to fix up the house before I list?",
+        lead: "Almost never.",
+        a: "I film a walkthrough and tell you the two or three fixes that pay for themselves, and the ones to skip. Most sellers spend under $2,000 before listing, not $20,000.",
+      },
+      {
+        q: "Why not just take a cash offer from an instant buyer?",
+        lead: "Because the fast option usually costs 10 to 20% of your price.",
+        a: "Instant buyers are quick and certain, and sometimes that is exactly what a seller needs. I put their number next to your likely sale price, after fees and repairs, so you choose with the real math. If the cash offer is better for you, I will say so.",
+      },
+      {
+        q: "What if the price I get is lower than I hoped?",
+        lead: "You will know before you list, not after.",
+        a: "I show you the sales behind the number, and you decide whether to list, wait or sell as-is. There is no pressure to list at all, and the pricing conversation is free.",
+      },
+    ],
+  },
+  {
+    label: "Buying",
+    items: [
+      {
+        q: "Is it a bad time to buy with rates where they are?",
+        lead: "Nobody can time rates, but you can price the payment.",
+        a: "I run the real monthly cost on homes you like, including seller credits and a rate buydown, so you see what you would actually pay. You can refinance if rates drop, but you can't renegotiate a price you overpaid. If waiting is smarter for you, I will tell you that.",
+      },
+      {
+        q: "I'm not pre-approved yet. Is it too early to talk?",
+        lead: "No. Most buyers call me first.",
+        a: "I introduce you to two lenders I trust, you learn your real budget in a day or two, and you don't see a single house until you know your number. Talking to me early costs nothing and saves months.",
+      },
+      {
+        q: "How do I compete with cash offers and bidding wars?",
+        lead: "Price is only one part of a winning offer.",
+        a: "Clean terms, a flexible closing date and a pre-inspection often beat a higher but messier offer. I write offers a seller can say yes to quickly, and I call the listing agent before you submit.",
+      },
+      {
+        q: "What if the inspection finds something scary?",
+        lead: "In Texas, you can walk away during your option period.",
+        a: "I go through the report with you, separate cosmetic from costly, and ask for repairs or credits. A bad report is a negotiating tool, and it is also your exit if the house is not right.",
+      },
+    ],
+  },
+  {
+    label: "Working with me",
+    items: [
+      {
+        q: "Do I have to sign a long contract with you?",
+        lead: "No lock-in, and no surprises in the paperwork.",
+        a: "Buyers sign a short representation agreement and sellers sign a listing agreement. Mine are plain English, short, and include a way out if we are not a fit. I walk you through every line before you sign.",
+      },
+      {
+        q: "What do you charge, and what do I actually get?",
+        lead: "You see the exact number in writing before you commit.",
+        a: `Commission is negotiable and there are no hidden fees. Sellers get a pre-listing walkthrough video, professional photos and marketing to my ${agent.followers} followers. Buyers get weekly shortlists and unedited tours. I explain every line on the first call.`,
+      },
+      {
+        q: "Are you a real agent or just good at Instagram?",
+        lead: "Both, and the order matters.",
+        a: `I have been licensed in Texas since 2014 and closed ${agent.stats[0].value} in the last 24 months. The reels exist so you can see how I work before you call. I answer my own calls and texts, and every negotiation is mine, not an assistant's.`,
+      },
+      {
+        q: "I'm just browsing. Will a call turn into a sales pitch?",
+        lead: "No. You leave with a clear next step, even if it is to wait.",
+        a: "The free call is 30 minutes about your situation. If the honest advice is to wait six months, that is what I will tell you. No pressure, and no follow-up spam.",
+      },
+    ],
+  },
+];
+
+// The process in four steps, one per story frame. `day` is a typical timeline from the first
+// call to closing; the photos are placeholders. Replace with the agent's real timeline.
 export const processSteps = [
   {
-    title: "Talk it through.",
-    body: "A free call to understand your timeline, your budget and what a good outcome looks like for you.",
-    detail: "30 minutes, no pressure",
+    day: "Day 1",
+    title: "Talk it through",
+    line: "Tell me your goal and timeline. Thirty minutes, no pitch, just a plan.",
+    sticker: "Free, 30 min",
+    icon: "call",
+    image: photo("1758876201450-cf77ab8b95bc"),
+    alt: "A woman smiling while talking on the phone",
+    focus: "50% 28%",
   },
   {
-    title: "Tour it honestly.",
-    body: "Weekly shortlists, off-market access and unedited walkthroughs that show what the listing leaves out.",
-    detail: "On camera before you drive over",
+    day: "Day 3",
+    title: "Tour it honestly",
+    line: "Unedited walkthroughs and an honest price, before anyone drives over.",
+    sticker: "Unedited video",
+    icon: "tour",
+    image: photo("1714647212027-2a0ad30cb4f1"),
+    alt: "A couple looking around the living room of a home they are viewing",
+    focus: "50% 30%",
   },
   {
-    title: "Close it cleanly.",
-    body: "Firm negotiation and a closing checklist handled end to end, so nothing slips between offer and keys.",
-    detail: "One agent, start to finish",
+    day: "Day 14",
+    title: "Negotiate hard",
+    line: "I compare every offer side by side and push for the best terms.",
+    sticker: "5 offers in",
+    icon: "offer",
+    image: photo("1714647212007-f34d8eed14bd"),
+    alt: "An agent going through offer papers with a client",
+    focus: "50% 35%",
+  },
+  {
+    day: "Day 44",
+    title: "Close cleanly",
+    line: "I run the paperwork to closing, so nothing slips and nothing is left to chase.",
+    sticker: "On your date",
+    icon: "keys",
+    image: photo("1741156386380-0236c72eb6f9"),
+    alt: "A hand holding the keys to a new home at the front door",
+    focus: "50% 40%",
   },
 ] as const;

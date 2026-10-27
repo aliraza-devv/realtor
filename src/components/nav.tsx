@@ -19,7 +19,7 @@ const links = [
   { href: "/properties", label: "Homes" },
   { href: "/#about", label: "About" },
   { href: "/#process", label: "Process" },
-  { href: "/#reviews", label: "Reviews" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 const cta = "Book a free call";

@@ -11,8 +11,8 @@ const icons = {
 } as const;
 
 /**
- * The four ways Austin deals go wrong, as copy-led cards. Each leads with the thing
- * buyers and sellers actually say, then what it costs them. All four are visible at once.
+ * The four ways Austin deals go wrong, as short cards: the thing buyers and sellers actually
+ * say, then what it costs them in a line. All four are visible at once.
  */
 export function ProblemSection() {
   return (
@@ -27,13 +27,9 @@ export function ProblemSection() {
         >
           Most Austin home deals go wrong in the same four ways.
         </h2>
-        <p className="mt-5 max-w-[56ch] text-lg leading-relaxed text-muted">
-          Here is what buyers and sellers tell me they wish they had known before they signed
-          anything.
-        </p>
       </Reveal>
 
-      <ul className="mt-9 grid gap-4 sm:grid-cols-2 lg:mt-8 lg:grid-cols-4">
+      <ul className="mt-9 grid gap-4 sm:grid-cols-2 lg:mt-10 lg:grid-cols-4">
         {problems.map((item, i) => {
           const Icon = icons[item.icon];
           const dark = i % 2 === 1;
@@ -43,11 +39,17 @@ export function ProblemSection() {
               <Reveal delay={i * 0.08} className="flex w-full">
                 <article
                   className={cn(
-                    "flex w-full flex-col rounded-[28px] p-6 lg:p-7",
+                    "relative flex w-full flex-col overflow-hidden rounded-[28px] p-6 lg:p-7",
                     dark ? "bg-brand text-white" : "border border-line bg-paper-deep text-ink",
                   )}
                 >
-                  <div className="flex items-center gap-3">
+                  <Icon
+                    className="pointer-events-none absolute -bottom-6 -right-6 size-40 opacity-[0.07]"
+                    weight="fill"
+                    aria-hidden="true"
+                  />
+
+                  <div className="relative flex items-center gap-3">
                     <span
                       className={cn(
                         "grid size-11 shrink-0 place-items-center rounded-full",
@@ -59,23 +61,23 @@ export function ProblemSection() {
                     <p className="text-[15px] font-semibold leading-tight">{item.topic}</p>
                   </div>
 
-                  <h3 className="mt-6 text-[clamp(1.3rem,1.7vw,1.6rem)] font-semibold leading-[1.14] tracking-[-0.03em]">
+                  <h3 className="relative mt-8 flex-1 text-[clamp(1.5rem,2vw,1.85rem)] font-semibold leading-[1.1] tracking-[-0.035em]">
                     &ldquo;{item.pain}&rdquo;
                   </h3>
 
                   <div
                     className={cn(
-                      "mt-6 border-t pt-5",
+                      "relative mt-8 border-t pt-4",
                       dark ? "border-white/20" : "border-ink/10",
                     )}
                   >
-                    <p className={cn("text-sm font-semibold", dark ? "text-accent" : "text-brand")}>
-                      What it costs you
+                    <p className={cn("text-sm", dark ? "text-white/70" : "text-muted")}>
+                      It costs you
                     </p>
                     <p
                       className={cn(
-                        "mt-2 text-[15px] leading-relaxed",
-                        dark ? "text-white/85" : "text-muted",
+                        "mt-1 text-[clamp(1.15rem,1.5vw,1.35rem)] font-semibold leading-tight tracking-[-0.03em]",
+                        dark ? "text-accent" : "text-brand",
                       )}
                     >
                       {item.cost}
@@ -88,10 +90,10 @@ export function ProblemSection() {
         })}
       </ul>
 
-      <Reveal className="mt-10 lg:mt-8">
-        <p className="max-w-[48ch] text-[clamp(1.5rem,2.4vw,2.25rem)] font-semibold leading-[1.08] tracking-[-0.05em]">
-          That is why I film every tour unedited, price to real sales,{" "}
-          <span className="text-brand">and stay reachable until you have the keys.</span>
+      <Reveal className="mt-10 lg:mt-9">
+        <p className="max-w-[40ch] text-[clamp(1.5rem,2.4vw,2.25rem)] font-semibold leading-[1.08] tracking-[-0.05em]">
+          So I film tours unedited, price to real sales,{" "}
+          <span className="text-brand">and answer my own phone.</span>
         </p>
       </Reveal>
     </section>

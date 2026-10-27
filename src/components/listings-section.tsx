@@ -9,13 +9,13 @@ import { properties, propertyTypes } from "@/data/properties";
 import { cn, formatPrice } from "@/lib/utils";
 import { Reveal } from "./reveal";
 
-const types = [{ label: "All homes", value: "" }, ...propertyTypes.map((t) => ({ label: t, value: t }))];
+const types = [{ label: "All", value: "" }, ...propertyTypes.map((t) => ({ label: t, value: t }))];
 
 const budgets = [
-  { label: "Any budget", min: 0, max: Infinity },
+  { label: "Any", min: 0, max: Infinity },
   { label: "Under $750K", min: 0, max: 750000 },
-  { label: "$750K to $1.5M", min: 750000, max: 1500000 },
-  { label: "$1.5M and up", min: 1500000, max: Infinity },
+  { label: "$750K-$1.5M", min: 750000, max: 1500000 },
+  { label: "$1.5M+", min: 1500000, max: Infinity },
 ];
 
 const bedrooms = [
@@ -42,7 +42,7 @@ function Chip({
       aria-pressed={active}
       onClick={onClick}
       className={cn(
-        "rounded-full border px-4 py-2 text-[15px] transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.96]",
+        "rounded-full border px-3.5 py-1.5 text-sm transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.96]",
         active
           ? "border-brand bg-brand text-white"
           : "border-line bg-paper text-ink hover:border-ink/30",
@@ -98,53 +98,51 @@ export function ListingsSection() {
         </p>
       </Reveal>
 
-      <div className="mt-10 rounded-[28px] border border-line bg-paper-deep p-5 sm:p-7 lg:mt-12">
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_1.5fr_0.8fr] lg:gap-10">
-          <fieldset>
-            <legend className="text-sm font-medium text-muted">Home type</legend>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {types.map((t) => (
-                <Chip key={t.label} active={type === t.value} onClick={() => setType(t.value)}>
-                  {t.label}
-                </Chip>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend className="text-sm font-medium text-muted">Budget</legend>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {budgets.map((b, i) => (
-                <Chip key={b.label} active={budget === i} onClick={() => setBudget(i)}>
-                  {b.label}
-                </Chip>
-              ))}
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend className="text-sm font-medium text-muted">Bedrooms</legend>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {bedrooms.map((b) => (
-                <Chip key={b.label} active={beds === b.value} onClick={() => setBeds(b.value)}>
-                  {b.label}
-                </Chip>
-              ))}
-            </div>
-          </fieldset>
+      <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 rounded-2xl border border-line bg-paper-deep px-4 py-3 sm:px-5 lg:mt-10">
+        <div role="group" aria-label="Home type" className="flex flex-wrap items-center gap-2.5">
+          <span className="text-sm text-muted">Type</span>
+          <div className="flex flex-wrap gap-1.5">
+            {types.map((t) => (
+              <Chip key={t.label} active={type === t.value} onClick={() => setType(t.value)}>
+                {t.label}
+              </Chip>
+            ))}
+          </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-line pt-5">
-          <p aria-live="polite" className="font-medium">
+        <div role="group" aria-label="Budget" className="flex flex-wrap items-center gap-2.5">
+          <span className="text-sm text-muted">Budget</span>
+          <div className="flex flex-wrap gap-1.5">
+            {budgets.map((b, i) => (
+              <Chip key={b.label} active={budget === i} onClick={() => setBudget(i)}>
+                {b.label}
+              </Chip>
+            ))}
+          </div>
+        </div>
+
+        <div role="group" aria-label="Bedrooms" className="flex flex-wrap items-center gap-2.5">
+          <span className="text-sm text-muted">Beds</span>
+          <div className="flex flex-wrap gap-1.5">
+            {bedrooms.map((b) => (
+              <Chip key={b.label} active={beds === b.value} onClick={() => setBeds(b.value)}>
+                {b.label}
+              </Chip>
+            ))}
+          </div>
+        </div>
+
+        <div className="ml-auto flex items-center gap-4">
+          <p aria-live="polite" className="text-sm font-medium">
             {results.length} {results.length === 1 ? "home matches" : "homes match"}
           </p>
           {filtered && (
             <button
               type="button"
               onClick={reset}
-              className="text-[15px] font-medium text-brand underline underline-offset-4"
+              className="text-sm font-medium text-brand underline underline-offset-4"
             >
-              Clear filters
+              Clear
             </button>
           )}
         </div>

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Handshake, Key, PhoneCall, VideoCamera } from "@phosphor-icons/react/ssr";
 import { processSteps } from "@/data/properties";
+import { StoryAvatar } from "./brand-mark";
 import { Reveal } from "./reveal";
 
 const icons = {
@@ -52,6 +53,7 @@ export function ProcessStories() {
                 <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3 py-1 text-sm font-semibold text-ink">
                   {step.day}
                 </span>
+                <StoryAvatar size={34} gap="border-white" className="absolute right-3 top-3" />
                 <p className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-3 py-1.5 text-sm font-semibold text-on-accent">
                   <Icon className="size-4" weight="bold" aria-hidden="true" />
                   {step.sticker}

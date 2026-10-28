@@ -23,7 +23,8 @@ export function StoryAvatar({
           alt=""
           fill
           sizes={`${size * 2}px`}
-          className="object-cover"
+          className="scale-[1.7] object-cover"
+          style={{ objectPosition: "50% 15%", transformOrigin: "50% 26%" }}
         />
       </span>
     </span>

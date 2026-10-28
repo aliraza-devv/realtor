@@ -2,8 +2,8 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 /**
- * Full-bleed, unedited photograph with the copy laid over it. The photo is mirrored
- * so the person heads toward the headline, and the scrim only protects legibility.
+ * Full-bleed photograph with the copy laid over it. She stands on the right so the headline
+ * sits over the lawn, and the scrim is light so the whole house stays clearly visible.
  */
 export function HeroStage({
   src,
@@ -23,13 +23,13 @@ export function HeroStage({
           fill
           priority
           sizes="100vw"
-          className="-scale-x-100 object-cover object-[24%_50%] sm:object-center"
+          className="object-cover object-[78%_50%] sm:object-[70%_50%] lg:object-center"
         />
       </div>
 
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,18,17,0.8)_0%,rgba(5,18,17,0.5)_36%,rgba(5,18,17,0.12)_60%,transparent_80%),linear-gradient(to_right,rgba(5,18,17,0.55)_0%,rgba(5,18,17,0.2)_45%,transparent_65%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,rgba(5,18,17,0.72)_0%,rgba(5,18,17,0.38)_32%,transparent_58%),linear-gradient(to_right,rgba(5,18,17,0.38)_0%,rgba(5,18,17,0.12)_40%,transparent_58%)]"
       />
 
       <div className="absolute inset-x-0 bottom-0 z-[3] px-6 pb-8 sm:px-10 sm:pb-12 lg:pb-14">

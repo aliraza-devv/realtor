@@ -8,7 +8,7 @@ import { ProblemSection } from "@/components/problem-section";
 import { ProcessSection } from "@/components/process-section";
 import { ProofStrip } from "@/components/proof-strip";
 import { ReelsSection } from "@/components/reels-section";
-import { VideoTestimonials } from "@/components/video-testimonials";
+import { TestimonialsSection } from "@/components/testimonials-section";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
       <ProofStrip />
       <ProblemSection />
       <FeaturedWork />
-      <VideoTestimonials />
+      <TestimonialsSection />
       <ListingsSection />
       <ReelsSection />
       <AboutSection />

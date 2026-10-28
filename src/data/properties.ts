@@ -3,14 +3,13 @@
 const photo = (id: string) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1600&q=80`;
 
-const heroBase = "https://images.unsplash.com/photo-1724362180955-271d1200803c";
-
 /**
- * Hero frame: one person at a modern home, cropped (focal point) so she sits on the right.
- * The hero mirrors it so she heads toward the headline. Shown as shot, with no filter.
- * Replace with the agent's own photo.
+ * Hero frame: one continuous photograph of the agent in front of a modern Austin home, with the
+ * whole house in view and her on the right, clear of the headline. The images in
+ * public/images (hero-home, about, process-1 to process-4) are AI-generated placeholders of one
+ * fictional agent: replace them with the agent's own photography.
  */
-export const heroPhoto = `${heroBase}?auto=format&fit=crop&crop=focalpoint&fp-x=0.64&fp-y=0.55&fp-z=1.3&w=3200&h=2000&q=80`;
+export const heroPhoto = "/images/hero-home.png";
 
 export const agent = {
   name: "Amelia Hart",
@@ -24,10 +23,10 @@ export const agent = {
   phone: "(512) 555-0142",
   email: "hello@hartresidential.example",
   office: "1200 S Congress Ave, Suite 210, Austin, TX",
-  // Face-focused, mirrored crop of the hero photo, so the avatar, About portrait and hero show one person.
-  photo: `${heroBase}?auto=format&fit=crop&crop=focalpoint&fp-x=0.49&fp-y=0.5&fp-z=2.4&w=900&h=1125&flip=h&q=80`,
-  // The full 4:5 frame of the same photo (mirrored like the hero), for the About section.
-  portrait: `${heroBase}?auto=format&fit=crop&w=1200&h=1500&flip=h&q=80`,
+  // The same fictional agent as the hero: the avatar (cropped to her face in StoryAvatar) and
+  // the About portrait both come from this 4:5 frame.
+  photo: "/images/about.png",
+  portrait: "/images/about.png",
   stats: [
     { value: "$142M", label: "Closed in the last 24 months" },
     { value: "230+", label: "Households helped" },
@@ -61,8 +60,8 @@ export const cases = [
     neighborhood: "Zilker",
     descriptor: "Modern, 4 bed",
     soldPrice: "$1,310,000",
-    image: photo("1600573472592-401b489a3cdc"),
-    alt: "A modern white home with a pool under a blue sky",
+    image: photo("1762811054947-605b20298615"),
+    alt: "A modern white home with a lit walkway and mature trees at dusk",
     story:
       "The first agent's photos hid the backyard. We reshot it unedited, priced to the street's last three sales, and held a single open house.",
     metrics: [
@@ -144,19 +143,20 @@ export const problems = [
   },
 ] as const;
 
-// Sample video testimonials. Each `video` is a placeholder clip and each `poster` a stock
-// portrait: replace both with real client recordings and stills before publishing.
+// Sample 9:16 video testimonials. Each `video` is a placeholder clip and each `image` a stock
+// portrait: replace names, quotes, clips and stills with real, permissioned client videos.
 const sampleVideo = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
 const portrait = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.36&fp-z=1&w=1600&h=900&q=80`;
+  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&crop=focalpoint&fp-x=0.5&fp-y=0.4&fp-z=1&w=720&h=1280&q=80`;
 
-export const videoTestimonials = [
+export const testimonials = [
   {
     name: "Priya & Daniel R.",
     detail: "Sold in Zilker",
-    result: "$45K over asking in 9 days",
+    result: "$45K over asking",
     quote: "She told us what to fix and what to leave alone. We never felt rushed.",
-    poster: portrait("1494790108377-be9c29b29330"),
+    length: "0:42",
+    image: portrait("1494790108377-be9c29b29330"),
     video: sampleVideo,
   },
   {
@@ -164,15 +164,44 @@ export const videoTestimonials = [
     detail: "Sold in Mueller",
     result: "7 offers in 6 days",
     quote: "Her pre-listing inspection kept every offer clean. No surprises, no renegotiating.",
-    poster: portrait("1507003211169-0a1dd7228f2d"),
+    length: "0:38",
+    image: portrait("1507003211169-0a1dd7228f2d"),
     video: sampleVideo,
   },
   {
     name: "Chidi Okafor",
     detail: "Sold in Travis Heights",
-    result: "Sold at asking in 21 days",
+    result: "Sold at asking",
     quote: "Our neighbors sat for months. She gave us the honest price on day one.",
-    poster: portrait("1544005313-94ddf0286df2"),
+    length: "0:35",
+    image: portrait("1544005313-94ddf0286df2"),
+    video: sampleVideo,
+  },
+  {
+    name: "Hannah Brooks",
+    detail: "Bought in Hyde Park",
+    result: "Won a 4-offer race",
+    quote: "I was scared of bidding wars. She wrote an offer the seller picked over higher ones.",
+    length: "0:47",
+    image: portrait("1438761681033-6461ffad8d80"),
+    video: sampleVideo,
+  },
+  {
+    name: "Daniel Reyes",
+    detail: "Bought in Bouldin Creek",
+    result: "Closed on his date",
+    quote: "She answered my texts at 9 p.m. on a Sunday. That never happened with my last agent.",
+    length: "0:33",
+    image: portrait("1500648767791-00dcc994a43e"),
+    video: sampleVideo,
+  },
+  {
+    name: "Sofia Martinez",
+    detail: "Sold in Clarksville",
+    result: "Sold in 8 days",
+    quote: "Her unedited video tour brought serious buyers only. No tire-kickers.",
+    length: "0:40",
+    image: portrait("1580489944761-15a19d654956"),
     video: sampleVideo,
   },
 ] as const;
@@ -526,9 +555,9 @@ export const processSteps = [
     line: "Tell me your goal and timeline. Thirty minutes, no pitch, just a plan.",
     sticker: "Free, 30 min",
     icon: "call",
-    image: photo("1758876201450-cf77ab8b95bc"),
-    alt: "A woman smiling while talking on the phone",
-    focus: "50% 28%",
+    image: "/images/process-1.png",
+    alt: "Amelia smiling on a call at her kitchen island, laptop and notes open",
+    focus: "50% 30%",
   },
   {
     day: "Day 3",
@@ -536,9 +565,9 @@ export const processSteps = [
     line: "Unedited walkthroughs and an honest price, before anyone drives over.",
     sticker: "Unedited video",
     icon: "tour",
-    image: photo("1714647212027-2a0ad30cb4f1"),
-    alt: "A couple looking around the living room of a home they are viewing",
-    focus: "50% 30%",
+    image: "/images/process-2.png",
+    alt: "Amelia filming an unedited walkthrough of a living room on her phone",
+    focus: "50% 32%",
   },
   {
     day: "Day 14",
@@ -546,9 +575,9 @@ export const processSteps = [
     line: "I compare every offer side by side and push for the best terms.",
     sticker: "5 offers in",
     icon: "offer",
-    image: photo("1714647212007-f34d8eed14bd"),
-    alt: "An agent going through offer papers with a client",
-    focus: "50% 35%",
+    image: "/images/process-3.png",
+    alt: "Amelia reviewing offer documents at a table with a confident smile",
+    focus: "50% 32%",
   },
   {
     day: "Day 44",
@@ -556,8 +585,8 @@ export const processSteps = [
     line: "I run the paperwork to closing, so nothing slips and nothing is left to chase.",
     sticker: "On your date",
     icon: "keys",
-    image: photo("1741156386380-0236c72eb6f9"),
-    alt: "A hand holding the keys to a new home at the front door",
-    focus: "50% 40%",
+    image: "/images/process-4.png",
+    alt: "Amelia handing over the keys in front of a deep teal front door",
+    focus: "50% 30%",
   },
 ] as const;

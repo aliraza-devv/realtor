@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ArrowRight, InstagramLogo } from "@phosphor-icons/react/ssr";
-import { agent, heroPhoto } from "@/data/properties";
+import { ArrowRight, InstagramLogo, Star } from "@phosphor-icons/react/ssr";
+import { agent, heroPhoto, proof } from "@/data/properties";
 import { HeroStage } from "./hero-stage";
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
@@ -10,40 +10,53 @@ export function Hero() {
     <section id="top" className="p-3">
       <HeroStage
         src={heroPhoto}
-        alt="Amelia in a white suit at a modern home, heading left and glancing back at the camera"
+        alt="Amelia standing on the flagstone path in front of an Austin ranch home, keys in hand, smiling"
       >
-        <a
-          href={agent.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Follow ${agent.name} on Instagram, ${agent.followers} followers`}
-          className="anim-fade-up inline-flex items-center gap-2.5 text-[15px] text-white/90 transition-colors hover:text-white"
+        <div
+          className="anim-fade-up flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px] text-white/90"
           style={delay(0)}
         >
-          <InstagramLogo className="size-5" aria-hidden="true" />
-          <span className="font-semibold">{agent.handle}</span>
-          <span className="text-white/70">{agent.followers} followers</span>
-        </a>
+          <p className="flex items-center gap-2">
+            <span className="flex gap-0.5 text-accent" aria-hidden="true">
+              {Array.from({ length: 5 }, (_, i) => (
+                <Star key={i} weight="fill" className="size-4" />
+              ))}
+            </span>
+            <span className="font-semibold">{proof.rating.score}</span>
+            <span className="text-white/70">from {proof.rating.count} clients</span>
+          </p>
+          <a
+            href={agent.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Follow ${agent.name} on Instagram, ${agent.followers} followers`}
+            className="inline-flex items-center gap-2 transition-colors hover:text-white"
+          >
+            <InstagramLogo className="size-5" aria-hidden="true" />
+            <span className="font-semibold">{agent.handle}</span>
+            <span className="text-white/70">{agent.followers}</span>
+          </a>
+        </div>
 
-        <h1 className="mt-5 text-[clamp(3.5rem,14.5vw,5.5rem)] sm:text-[clamp(4rem,10vw,9.5rem)] lg:text-[clamp(5rem,8.6vw,9rem)] font-semibold leading-[0.88] tracking-[-0.065em] text-white">
+        <h1 className="mt-5 text-[clamp(3.25rem,13vw,5rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-white sm:text-[clamp(3.5rem,8vw,6.5rem)] lg:text-[clamp(4.25rem,6.4vw,6.75rem)]">
           <span className="block overflow-hidden pb-[0.06em] pt-[0.02em]">
             <span className="anim-rise block" style={delay(120)}>
-              Real homes.
+              Sell for more.
             </span>
           </span>
           <span className="block overflow-hidden pb-[0.12em] pr-[0.08em]">
             <span className="anim-rise block italic" style={delay(240)}>
-              No filter.
+              Buy with confidence.
             </span>
           </span>
         </h1>
 
         <p
-          className="anim-fade-up mt-5 max-w-[40ch] text-lg leading-relaxed text-white/85 sm:text-xl"
+          className="anim-fade-up mt-5 max-w-[44ch] text-lg leading-relaxed text-white/90 sm:text-xl"
           style={delay(420)}
         >
-          Unscripted Austin tours, straight talk on price, and one agent from first showing to
-          closing.
+          Austin homes sell in {agent.stats[2].value} with me. Unedited tours, honest pricing, and
+          one agent from first call to keys.
         </p>
 
         <div
@@ -54,7 +67,7 @@ export function Hero() {
             href="/#contact"
             className="group inline-flex h-14 w-full items-center justify-between gap-6 whitespace-nowrap rounded-full bg-white pl-7 pr-2 text-[16px] font-medium text-[#0e1210] transition-transform duration-300 active:scale-[0.98] sm:w-auto"
           >
-            Book a free call
+            Book my free call
             <span className="grid size-10 place-items-center rounded-full bg-accent text-on-accent transition-transform duration-300 group-hover:translate-x-0.5">
               <ArrowRight className="size-[18px]" weight="bold" aria-hidden="true" />
             </span>
@@ -66,6 +79,13 @@ export function Hero() {
             Browse homes
           </Link>
         </div>
+
+        <p
+          className="anim-fade-up mt-4 text-sm text-white/75"
+          style={delay(620)}
+        >
+          Free 30-minute call. No pitch, no obligation.
+        </p>
       </HeroStage>
     </section>
   );

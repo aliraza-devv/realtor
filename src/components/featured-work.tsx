@@ -52,19 +52,43 @@ function CaseInfo({ item, className }: { item: Case; className?: string }) {
   );
 }
 
-function Heading({ className }: { className?: string }) {
+function Heading({ className, scrollHint = false }: { className?: string; scrollHint?: boolean }) {
   return (
     <div className={className}>
       <h2
         id="work-title"
-        className="text-[clamp(2.9rem,6.4vw,6.25rem)] font-semibold leading-[0.93] tracking-[-0.06em]"
+        className="text-[clamp(2.75rem,5vw,5rem)] font-semibold leading-[0.95] tracking-[-0.055em]"
       >
-        Shown honestly. Sold fast.
+        <span className="block">Shown honestly.</span>
+        <span className="block text-brand">Sold fast.</span>
       </h2>
-      <p className="mt-6 max-w-[34ch] text-lg leading-relaxed text-muted">
+      <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-muted">
         Four recent Austin sales: what each one sold for, how it compared to asking, and what we
         changed to get there.
       </p>
+
+      <ul
+        aria-label="Homes in this gallery"
+        className="mt-8 max-w-[420px] divide-y divide-line border-y border-line"
+      >
+        {cases.map((item) => (
+          <li key={item.neighborhood} className="flex items-baseline justify-between gap-4 py-3">
+            <span className="font-medium">{item.neighborhood}</span>
+            <span className="font-display text-[1.15rem] tracking-[-0.03em] text-brand">
+              {item.soldPrice}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      {scrollHint && (
+        <p className="mt-6 flex items-center gap-3 text-sm text-muted">
+          <span className="grid size-8 place-items-center rounded-full bg-brand text-white">
+            <ArrowRight className="size-4" weight="bold" aria-hidden="true" />
+          </span>
+          Keep scrolling to see each sale
+        </p>
+      )}
     </div>
   );
 }
@@ -213,7 +237,7 @@ export function FeaturedWork() {
           style={{ x }}
           className="absolute inset-y-0 left-0 flex w-max items-center gap-[6vw] pl-[max(2rem,calc((100vw-1320px)/2+2rem))] pr-[10vw] will-change-transform"
         >
-          <Heading className="w-[min(42vw,640px)] shrink-0" />
+          <Heading className="w-[min(40vw,600px)] shrink-0" scrollHint />
 
           {cases.map((item, i) => (
             <article key={item.neighborhood} className="flex shrink-0 items-center gap-[3.5vw]">

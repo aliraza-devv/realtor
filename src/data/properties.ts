@@ -564,12 +564,12 @@ export const processSteps = [
   {
     day: "Day 3",
     title: "Tour it honestly",
-    line: "Unedited walkthroughs and an honest price, before anyone drives over.",
-    sticker: "Unedited video",
+    line: "We walk it in person, room by room, with straight answers and no pressure.",
+    sticker: "In person",
     icon: "tour",
-    image: "/images/process-2.png",
-    alt: "Amelia filming an unedited walkthrough of a living room on her phone",
-    focus: "50% 32%",
+    image: "/images/process-2-tour.png",
+    alt: "Amelia showing a young family around a bright living room during an in-person home tour",
+    focus: "50% 40%",
   },
   {
     day: "Day 14",

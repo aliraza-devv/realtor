@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { Handshake, Key, PhoneCall, VideoCamera } from "@phosphor-icons/react/ssr";
+import { Door, Handshake, Key, PhoneCall } from "@phosphor-icons/react/ssr";
 import { processSteps } from "@/data/properties";
 import { StoryAvatar } from "./brand-mark";
 import { Reveal } from "./reveal";
 
 const icons = {
   call: PhoneCall,
-  tour: VideoCamera,
+  tour: Door,
   offer: Handshake,
   keys: Key,
 } as const;

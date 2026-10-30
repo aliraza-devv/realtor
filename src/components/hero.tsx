@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, InstagramLogo, Star } from "@phosphor-icons/react/ssr";
-import { agent, heroPhoto, proof } from "@/data/properties";
+import { agent, heroPhoto, heroPhotoMobile, proof } from "@/data/properties";
 import { HeroStage } from "./hero-stage";
 
 const delay = (ms: number) => ({ "--delay": `${ms}ms` }) as React.CSSProperties;
@@ -10,6 +10,7 @@ export function Hero() {
     <section id="top" className="p-3">
       <HeroStage
         src={heroPhoto}
+        mobileSrc={heroPhotoMobile}
         alt="Amelia standing on the flagstone path in front of an Austin ranch home, keys in hand, smiling"
       >
         <div
@@ -30,7 +31,7 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Follow ${agent.name} on Instagram, ${agent.followers} followers`}
-            className="inline-flex items-center gap-2 transition-colors hover:text-white"
+            className="hidden items-center gap-2 transition-colors hover:text-white sm:inline-flex"
           >
             <InstagramLogo className="size-5" aria-hidden="true" />
             <span className="font-semibold">{agent.handle}</span>
@@ -38,7 +39,7 @@ export function Hero() {
           </a>
         </div>
 
-        <h1 className="mt-5 text-[clamp(3.25rem,13vw,5rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-white sm:text-[clamp(3.5rem,8vw,6.5rem)] lg:text-[clamp(4.25rem,6.4vw,6.75rem)]">
+        <h1 className="mt-3 sm:mt-5 text-[clamp(2.6rem,11.2vw,5rem)] font-semibold leading-[0.9] tracking-[-0.06em] text-white sm:text-[clamp(3.5rem,8vw,6.5rem)] lg:text-[clamp(4.25rem,6.4vw,6.75rem)]">
           <span className="block overflow-hidden pb-[0.06em] pt-[0.02em]">
             <span className="anim-rise block" style={delay(120)}>
               Sell for more.
@@ -52,7 +53,7 @@ export function Hero() {
         </h1>
 
         <p
-          className="anim-fade-up mt-5 max-w-[44ch] text-lg leading-relaxed text-white/90 sm:text-xl"
+          className="anim-fade-up mt-5 hidden max-w-[44ch] text-lg leading-relaxed text-white/90 sm:block sm:text-xl"
           style={delay(420)}
         >
           Austin homes sell in {agent.stats[2].value} with me. Unedited tours, honest pricing, and
@@ -60,7 +61,7 @@ export function Hero() {
         </p>
 
         <div
-          className="anim-fade-up mt-8 flex flex-col gap-3 sm:flex-row sm:items-center"
+          className="anim-fade-up mt-5 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:items-center"
           style={delay(520)}
         >
           <Link
@@ -74,14 +75,14 @@ export function Hero() {
           </Link>
           <Link
             href="/properties"
-            className="inline-flex h-14 w-full items-center justify-center whitespace-nowrap rounded-full border border-white/45 px-7 text-[16px] font-medium text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-[0.98] sm:w-auto"
+            className="hidden h-14 w-full items-center justify-center whitespace-nowrap rounded-full border border-white/45 px-7 sm:inline-flex text-[16px] font-medium text-white transition-colors duration-300 hover:border-white hover:bg-white/10 active:scale-[0.98] sm:w-auto"
           >
             Browse homes
           </Link>
         </div>
 
         <p
-          className="anim-fade-up mt-4 text-sm text-white/75"
+          className="anim-fade-up mt-3 text-sm text-white/75 sm:mt-4"
           style={delay(620)}
         >
           Free 30-minute call. No pitch, no obligation.

@@ -10,6 +10,8 @@ const photo = (id: string) =>
  * fictional agent: replace them with the agent's own photography.
  */
 export const heroPhoto = "/images/hero-home.png";
+/** Portrait framing of the same scene, used below the large breakpoint. */
+export const heroPhotoMobile = "/images/hero-home-mobile.png";
 
 export const agent = {
   name: "Amelia Hart",
